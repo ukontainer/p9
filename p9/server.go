@@ -119,16 +119,16 @@ type connState struct {
 
 // fidRef wraps a node and tracks references.
 type fidRef struct {
+	// refs is an active refence count.
+	//
+	// The node above will be closed only when refs reaches zero.
+	refs int64
+
 	// server is the associated server.
 	server *Server
 
 	// file is the associated File.
 	file File
-
-	// refs is an active refence count.
-	//
-	// The node above will be closed only when refs reaches zero.
-	refs int64
 
 	// openedMu protects opened and openFlags.
 	openedMu sync.Mutex
